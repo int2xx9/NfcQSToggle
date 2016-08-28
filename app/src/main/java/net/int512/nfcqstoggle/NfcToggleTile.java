@@ -72,6 +72,7 @@ public class NfcToggleTile extends TileService {
      }
 
     private void updateTileState() {
+        if (getQsTile() == null) return;
         if (isNfcEnabled) {
             getQsTile().setState(Tile.STATE_ACTIVE);
             getQsTile().setIcon(icLeakAdd);
@@ -111,5 +112,20 @@ public class NfcToggleTile extends TileService {
         } catch (InvocationTargetException|IllegalAccessException e) {
             Toast.makeText(getApplicationContext(), getResources().getText(R.string.state_change_error), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onStartListening() {
+        updateTileState();
+    }
+
+    @Override
+    public void onStopListening() {
+        updateTileState();
+    }
+
+    @Override
+    public void onTileAdded() {
+        updateTileState();
     }
 }
