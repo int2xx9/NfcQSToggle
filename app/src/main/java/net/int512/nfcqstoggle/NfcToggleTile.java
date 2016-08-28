@@ -16,24 +16,35 @@ import java.lang.reflect.Method;
 
 public class NfcToggleTile extends TileService {
 
-    public class NfcBroadcastReceiver extends BroadcastReceiver {
+    public static class NfcBroadcastReceiver extends BroadcastReceiver {
+
+        private NfcToggleTile tile = null;
+
+        public NfcBroadcastReceiver() {
+            throw new UnsupportedOperationException();
+        }
+
+        NfcBroadcastReceiver(NfcToggleTile tile) {
+            this.tile = tile;
+        }
 
         @Override
         public void onReceive(Context context, Intent intent) {
+            if (tile == null) return;
             int state = intent.getIntExtra(NfcAdapter.EXTRA_ADAPTER_STATE, -1);
             if (state == NfcAdapter.STATE_OFF) {
-                NfcToggleTile.this.isNfcEnabled = false;
+                tile.isNfcEnabled = false;
             } else if (state == NfcAdapter.STATE_ON) {
-                NfcToggleTile.this.isNfcEnabled = true;
+                tile.isNfcEnabled = true;
             }
-            NfcToggleTile.this.updateTileState();
+            tile.updateTileState();
         }
     }
 
     private int NFC_STATE_DISABLE = 0;
     private int NFC_STATE_ENABLE = 1;
 
-    private NfcBroadcastReceiver broadcastReceiver = new NfcBroadcastReceiver();
+    private NfcBroadcastReceiver broadcastReceiver = new NfcBroadcastReceiver(this);
     private boolean isNfcEnabled = false;
     private Icon icLeakAdd;
     private Icon icLeakRemove;
