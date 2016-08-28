@@ -41,8 +41,8 @@ public class NfcToggleTile extends TileService {
         }
     }
 
-    private int NFC_STATE_DISABLE = 0;
-    private int NFC_STATE_ENABLE = 1;
+    private static final int NFC_STATE_DISABLE = 0;
+    private static final int NFC_STATE_ENABLE = 1;
 
     private NfcBroadcastReceiver broadcastReceiver = new NfcBroadcastReceiver(this);
     private boolean isNfcEnabled = false;
