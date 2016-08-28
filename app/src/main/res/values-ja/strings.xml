@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="system_app">正しく動作させるにはシステムアプリとしてこのアプリをインストールする必要があります。</string>
+    <string name="state_change_error">NFCの状態変更時にエラー (システムアプリとしてこのアプリをインストールする必要があります)</string>
+</resources>
